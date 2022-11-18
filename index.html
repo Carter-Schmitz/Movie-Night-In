@@ -13,15 +13,23 @@
       </header>
       <div >
         <container>
-           <h2>Check which criteria to seach for:</h2>
-            
+           <h2>Search by Movie title and/or year :</h2>
+           <form id="title" class="card-body">
+             <label for="title">Movie Title:</label>
+             <input name="title" id="title" type="text" autofocus="true" />
+           </form>
+           <form id="year" class="card-body">
+            <label for="year">Movie Year:</label>
+            <input name="year" id="year" type="text" autofocus="true" />
+          </form>
+           
         </container>
-        <button>search</button>
+        <button type = "submit" class="btn">search</button>
         
       </div>
    
     
-    <!-- <script src=".js"></script> -->
+    <script src="script.js"></script>
   </body>
  
   </html>
