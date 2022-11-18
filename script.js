@@ -12,6 +12,15 @@ var action = ["The Wages of Fear", "Seven Samurai", "Goldfinger", "Shaft", "Ente
   crossorigin="anonymous">
 </script> */
 
+// Function for selecting a random movie, it is not coded correctly yet
+// movies could be the var that stores the selected array from above
+function movieSelection() {
+  var randomMovie = movies[Math.floor(Math.random() * movies.length)];
+  document.getElementById("selectedMovie").innerHTML = randomMovie; // this adds the selected movie the HTML, may not be needed
+  watchedMovies = watchedMovies.concat(randomMovie); // this could be how we add movies to the watch list
+  // once a random movie is selected it can be added to the API bellow
+}
+
 $("#submitMovie").click(function () {
   //Gather values from the user fields and store them into variables.
   var title = $("#title").val();
