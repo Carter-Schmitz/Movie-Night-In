@@ -4,25 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Password Generator</title>
+    <title>Movie-Night_In</title>
     <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
   <body>
       <header>
         <h1>Movie Night In </h1>
       </header>
+      <nav class = "nav-bar">
+        <ul>
+            <a href="#">Watch List</a>
+        </ul>     
+    </nav> 
+
       <div >
         <container>
-           <h2>Check which criteria to seach for:</h2>
-            
+           <h2>Search by Movie title and/or year :</h2>
+           <form id="title" class="card-body">
+             <label for="title">Movie Title:</label>
+             <input name="title" id="title" type="text" autofocus="true" />
+           </form>
+           <form id="year" class="card-body">
+            <label for="year">Movie Year:</label>
+            <input name="year" id="year" type="text" autofocus="true" />
+          </form>
+           
         </container>
-        <button>search</button>
-        
+        <button type = "submit" class="btn">search</button>
+      </div>
+
+      <!-- code for movie search results -->
+      <div id-main>
+<!-- card section for movie selecion 1 -->
+      <div id="card-1">
+        <ul id="title"></ul>
+        <ul id ="plot"></ul>
+        <ul id="img"></ul>
+        <ul id ="score"></ul>
+      </div>
+<!-- card section for movie selection 2 -->
+      <div id="card-2">
+        <ul id="title"></ul>
+        <ul id ="plot"></ul>
+        <ul id="img"></ul>
+        <ul id ="score"></ul>
+      </div> 
+<!-- card section for movie selection 3 -->       
+        <div id="card-3">
+          <ul id="title"></ul>
+          <ul id ="plot"></ul>
+          <ul id="img"></ul>
+          <ul id ="score"></ul>
+        </div>
+ <!-- card section for movie selection 4 -->
+        <div id="card-4">
+          <ul id="title"></ul>
+          <ul id ="plot"></ul>
+          <ul id="img"></ul>
+          <ul id ="score"></ul>
+        </div> 
+ <!-- card section for movie selection 5 -->
+      <div id="card-4">
+        <ul id="title"></ul>
+       <ul id ="plot"></ul>
+       <ul id="img"></ul>
+       <ul id ="score"></ul>
+      </div> 
+
       </div>
    
     
-    <!-- <script src=".js"></script> -->
+    <script src="script.js"></script>
   </body>
  
   </html>
+ 
  
