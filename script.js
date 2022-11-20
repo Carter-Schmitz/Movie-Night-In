@@ -14,18 +14,59 @@ var action = ["The Wages of Fear", "Seven Samurai", "Goldfinger", "Shaft", "Ente
 
 // Function for selecting a random movie, it is not coded correctly yet
 // movies could be the var that stores the selected array from above
-function movieSelection() {
-  var randomMovie = movies[Math.floor(Math.random() * movies.length)];
-  document.getElementById("selectedMovie").innerHTML = randomMovie; // this adds the selected movie the HTML, may not be needed
-  watchedMovies = watchedMovies.concat(randomMovie); // this could be how we add movies to the watch list
-  // once a random movie is selected it can be added to the API bellow
-}
 
-$("#submitMovie").click(function () {
+var randomMovie = ''
+var title = ''
+var year = ''
+
+$('#comedySelection').click(function () {
+  $('#title').val('');
+  $('#year').val('');
+  randomSelection = comedy[Math.floor(Math.random() * comedy.length)];
+  randomMovie = randomSelection;
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  console.log(randomMovie);
+});
+
+$('#romcomSelection').click(function () {
+  $('#title').val('');
+  $('#year').val('');
+  randomSelection = romcom[Math.floor(Math.random() * romcom.length)];
+  randomMovie = randomSelection;
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  console.log(randomMovie);
+});
+
+$('#horrorSelection').click(function () {
+  $('#title').val('');
+  $('#year').val('');
+  randomSelection = horror[Math.floor(Math.random() * horror.length)];
+   randomMovie = randomSelection;
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  console.log(randomMovie);
+});
+
+$('#actionSelection').click(function () {
+  $('#title').val('');
+  $('#year').val('');
+  randomSelection = action[Math.floor(Math.random() * action.length)];
+  randomMovie = randomSelection;
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  console.log(randomMovie);
+});
+
+$("#apiSubmit").click(function () {
   //Gather values from the user fields and store them into variables.
-  var title = $("#title").val();
-  var year = $("#year").val();
+  title = $("#title").val();
+  year = $("#year").val();
 
+  if (title === '') {
+    title = randomMovie
+    console.log(title, year);
+  }else if (title ===! '') {
+    console.log(title, year);
+  }
+  
   // Concatenate the variables above into the api url
   var queryString = "https://www.omdbapi.com/?apikey=5c231540&t=" + title + "&y=" + year + "&plot=full&r=json";
 
@@ -41,7 +82,7 @@ $("#submitMovie").click(function () {
       // Log JSON data into console
       console.log(response);
 
-      // create an HTML element that will hold all of the prettified elements
+      // create an HTML element that will hold all of the elements
       var movieContainer = $('<div class="movie_Container">');
       // Append the movie container to the existing container
       $(".movieOutput").append(movieContainer);
