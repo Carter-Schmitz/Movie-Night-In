@@ -8,7 +8,7 @@
 
   <title>Movie Night In</title>
   <link rel="stylesheet" href="./dist/output.css" />
-  <link rel="stylesheet" href="style.css" /> -->
+  <link rel="stylesheet" href="src/style.css" /> 
 
   <title>Movie-Night_In</title>
   <!-- <link rel="stylesheet" href="style.css" /> -->
@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="bg-red-500">
+<body >
   <header class="font-bold text-center text-8xl p-8">
     <h1>Movie Night In </h1>
   </header>
@@ -30,28 +30,13 @@
     </ul>
   </nav>
 
-  <div>
-    <container>
-      <h2>Search by Movie title and/or year :</h2>
-      <form id="title" class="card-body">
-        <label for="title">Movie Title:</label>
-        <input name="title" id="title" type="text" autofocus="true" />
-      </form>
-      <form id="year" class="card-body">
-        <label for="year">Movie Year:</label>
-        <input name="year" id="year" type="text" autofocus="true" />
-      </form>
-
-    </container>
-    <button type="submit" class="btn">search</button>
-
-  </div>
+  
 
   <!-- This code is what I used to make the API/JavaScript work -->
   <!-- I did not change what you have. I am going to leave it here so that you can decide how you want to code it. -->
   <!-- I think the most important part is just keeping the id/names so that the script can find everything. -->
 
-  <!-- <label for="title">Movie Title:</label>
+  <label for="title">Movie Title:</label>
   <input name="title" id="title" type="text" autofocus="true" />
   </div>
   <br>
@@ -72,50 +57,12 @@
   <br>
   <h1>The movie is... <span id="randomMovie-Output"></span></h1>
   <br>
-  <div>
-    <h2 class="movieOutput">Movie Information:</h2>
-  </div>  -->
+  <div class="movieOutput">
+    <h2 >Movie Information:</h2>
+  </div> 
 
 
-  <!-- code for movie search results -->
-  <div id-main>
-    <!-- card section for movie selecion 1 -->
-    <div id="card-1">
-      <ul id="title"></ul>
-      <ul id="plot"></ul>
-      <ul id="img"></ul>
-      <ul id="score"></ul>
-    </div>
-    <!-- card section for movie selection 2 -->
-    <div id="card-2">
-      <ul id="title"></ul>
-      <ul id="plot"></ul>
-      <ul id="img"></ul>
-      <ul id="score"></ul>
-    </div>
-    <!-- card section for movie selection 3 -->
-    <div id="card-3">
-      <ul id="title"></ul>
-      <ul id="plot"></ul>
-      <ul id="img"></ul>
-      <ul id="score"></ul>
-    </div>
-    <!-- card section for movie selection 4 -->
-    <div id="card-4">
-      <ul id="title"></ul>
-      <ul id="plot"></ul>
-      <ul id="img"></ul>
-      <ul id="score"></ul>
-    </div>
-    <!-- card section for movie selection 5 -->
-    <div id="card-4">
-      <ul id="title"></ul>
-      <ul id="plot"></ul>
-      <ul id="img"></ul>
-      <ul id="score"></ul>
-    </div>
-
-  </div>
+ 
 
 
   <script src="script.js"></script>

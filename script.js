@@ -4,7 +4,9 @@ var romcom = ["When Harry Met Sally", "Sleepless in Seattle", "Annie Hall", "Pre
 var horror = ["The Shining", "The Exorcist", "Jaws", "Alien", "The Texas Chainsaw Massacre", "Nosferatu", "Night Of The Living Dead", "Psycho", "The Silence Of The Lambs", "Audition", "The Cabinet Of Dr. Caligari", "Halloween", "The Evil Dead", "Freaks", "The Fly", "Hereditary", "Rosemary’s Baby", "Dawn Of The Dead ", "Dracula", "Evil Dead II", "The Bride Of Frankenstein", "A Nightmare On Elm Street", "Invasion Of The Body Snatchers", "The Blair Witch Project", "Scream", "28 Days Later", "The Thing", "Get Out", "Don’t Look Now", "Creepshow"]
 var action = ["The Wages of Fear", "Seven Samurai", "Goldfinger", "Shaft", "Enter the Dragon", "The Driver", "Raiders of the Lost Ark", "First Blood", "RoboCop", "Die Hard", "Terminator 2: Judgment Day", "Point Break", "The Fugitive", "Léon: The Professional", "Speed ", "Drunken Master II", "The Matrix", "Battle Royale", "Crouching Tiger, Hidden Dragon", "Bad Boys II", "Ong-Bak: The Thai Warrior", "Kill Bill: Vol 1", "The Bourne Ultimatum", "The Raid", "Fast Five", "John Wick", "Mad Max: Fury Road", "The Villainess ", "Mission: Impossible - Fallout"]
 
-// Add JavaScript Below
+//add a selector for movieOutput(DT)
+var movieOutputEl = document.querySelector('.movieOutput')
+
 
 //  The script below will need to be added to the HTML in order for the function to run
 /* <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -60,6 +62,9 @@ $("#apiSubmit").click(function () {
   title = $("#title").val();
   year = $("#year").val();
 
+    //will clear the movieOutput content so that only one result is shown at a time(DT) 
+  movieOutputEl.textContent = "";
+
   if (title === '') {
     title = randomMovie
     console.log(title, year);
@@ -75,15 +80,19 @@ $("#apiSubmit").click(function () {
     url: queryString, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
     method: 'GET'
   }).done(function (response) {
+    // var movieOutputEl = document.querySelector(".movieOutput");
+    // movieOutputEl = " "
+    
     if (response.length < 1) {
       // Output error message into output container
       $("#output").append("No such movie exists");
     } else {
       // Log JSON data into console
       console.log(response);
-
+      var movieContainer 
       // create an HTML element that will hold all of the elements
-      var movieContainer = $('<div class="movie_Container">');
+       movieContainer = $('<div class="movie_Container">');
+      //movieOutput.textContent=" ";
       // Append the movie container to the existing container
       $(".movieOutput").append(movieContainer);
 
@@ -97,6 +106,7 @@ $("#apiSubmit").click(function () {
         }
 
         movieContainer.append(element);
+
       }
     }
   });
