@@ -1,9 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body{
+    background-image: url(https://wallpaperaccess.com/full/1561985.jpg) ;
+    background-size: cover;
+}
+
 .movieOutput{
     text-align: center;
-    background-color: rgb(239, 239, 243);
+    background-color: rgb(110, 110, 121);
     color: rgb(22, 20, 20);
     border-radius: 0;
     border-bottom: 1px solid black;
@@ -14,3 +21,4 @@
     color: rgb(13, 12, 12);
     align-content: left;
   }
+
