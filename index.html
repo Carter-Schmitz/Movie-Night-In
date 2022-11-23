@@ -7,52 +7,60 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
   <title>Movie Night In</title>
+
   <link rel="stylesheet" href="src/style.css" />
 
-  <title>Movie-Night_In</title>
 
+  <title>Movie-Night_In</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
     </script>
 
 </head>
 
-<body class="bg-white">
-  <header class="font-bold text-center text-8xl p-8">
+
+<body class="">
+  <header class="font-bold text-center text-8xl p-8 text-yellow-300">
+
     <h1>Movie Night In </h1>
   </header>
 
-  <nav class="nav-bar">
+  <nav class="nav-bar text-yellow-300">
     <ul>
-      <a href="#">Watch List</a>
+      <h2>Watch List<h2>
     </ul>
   </nav>
-
-  <div>
-    <label for="title">Movie Title:</label>
-    <input name="title" id="title" type="text" autofocus="true" />
-
-    <br>
+  <container class="flex flex-wrap place-content-center space-x-10 text-yellow-300">
     <div>
-      <label for="year">Movie Year: </label>
-      <input name="year" id="year" type="text" autofocus="true" />
-    </div>
-    <button class="btn btn-default" id="apiSubmit">Search</button>
+      <label for="title">Movie Title:</label>
+      <input name="title" id="title" type="text" autofocus="true" />
 
-  </div>
-  <br>
-  <button id="comedySelection">Comedy</button>
-  <br>
-  <button id="romcomSelection">RomCom</button>
-  <br>
-  <button id="horrorSelection">Horror</button>
-  <br>
-  <button id="actionSelection">Action</button>
-  <br>
-  <h1>The movie is... <span id="randomMovie-Output"></span></h1>
+      <br>
+      <div>
+        <label for="year">Movie Year: </label>
+        <input name="year" id="year" type="text" autofocus="true" />
+      </div>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="apiSubmit">Search</button>
+    </div>
+
+    <p> Or, pick a Genre and get a random movie!</p>
+    <br>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  id="comedySelection">Comedy</button>
+    <br>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  id="romcomSelection">RomCom</button>
+    <br>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  id="horrorSelection">Horror</button>
+    <br>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  id="actionSelection">Action</button>
+    <br>
+  </container>
+  <h1 class="text-yellow-300">The movie is... <span id="randomMovie-Output"></span></h1>
   <br>
   <div>
-    <h2 class="movieOutput">Movie Information:</h2>
+    <h2 class="movieOutput text-yellow-300">Movie Information:</h2>
+
+    <button class="btn btn-default" id="apiSubmit">Search</button>
 
   </div>
 
