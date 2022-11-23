@@ -68,7 +68,6 @@ $("#apiSubmit").click(function () {
   //will clear the movieOutput content so that only one result is shown at a time(DT) 
   movieOutputEl.textContent = "";
 
-
   if (title === '') {
     title = randomMovie
     console.log(title, year);
@@ -90,6 +89,7 @@ $("#apiSubmit").click(function () {
     } else {
       // Log JSON data into console
       console.log(response);
+    
 
       // create an HTML element that will hold all of the elements
       var movieContainer = $('<div class="movie_Container">');
