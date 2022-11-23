@@ -4,14 +4,6 @@ var romcom = ["When Harry Met Sally", "Sleepless in Seattle", "Annie Hall", "Pre
 var horror = ["The Shining", "The Exorcist", "Jaws", "Alien", "The Texas Chainsaw Massacre", "Nosferatu", "Night Of The Living Dead", "Psycho", "The Silence Of The Lambs", "Audition", "The Cabinet Of Dr. Caligari", "Halloween", "The Evil Dead", "Freaks", "The Fly", "Hereditary", "Rosemary’s Baby", "Dawn Of The Dead ", "Dracula", "Evil Dead II", "The Bride Of Frankenstein", "A Nightmare On Elm Street", "Invasion Of The Body Snatchers", "The Blair Witch Project", "Scream", "28 Days Later", "The Thing", "Get Out", "Don’t Look Now", "Creepshow"]
 var action = ["The Wages of Fear", "Seven Samurai", "Goldfinger", "Shaft", "Enter the Dragon", "The Driver", "Raiders of the Lost Ark", "First Blood", "RoboCop", "Die Hard", "Terminator 2: Judgment Day", "Point Break", "The Fugitive", "Léon: The Professional", "Speed ", "Drunken Master II", "The Matrix", "Battle Royale", "Crouching Tiger, Hidden Dragon", "Bad Boys II", "Ong-Bak: The Thai Warrior", "Kill Bill: Vol 1", "The Bourne Ultimatum", "The Raid", "Fast Five", "John Wick", "Mad Max: Fury Road", "The Villainess ", "Mission: Impossible - Fallout"]
 
-// Add JavaScript Below
-
-//  The script below will need to be added to the HTML in order for the function to run
-/* <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
-  crossorigin="anonymous">
-</script> */
-
 // Function for selecting a random movie, it is not coded correctly yet
 // movies could be the var that stores the selected array from above
 
