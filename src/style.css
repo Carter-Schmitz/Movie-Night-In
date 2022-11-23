@@ -10,12 +10,19 @@ body{
 
 .movieOutput{
     text-align: center;
-    background-color: rgb(110, 110, 121);
+    background-color: rgb(80, 10, 17);
     color: rgb(22, 20, 20);
     border-radius: 0;
     border-bottom: 1px solid black;
-
+    width: 50%;
+    margin: auto;
 }
+.moviePoster{
+   
+    margin: auto;
+    
+}
+
 .btn {
     background-color: rgb(228, 227, 232);
     color: rgb(13, 12, 12);

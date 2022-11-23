@@ -7,6 +7,7 @@ var action = ["The Wages of Fear", "Seven Samurai", "Goldfinger", "Shaft", "Ente
 //add a selector for movieOutput(DT)
 var movieOutputEl = document.querySelector('.movieOutput');
 
+watchListEl=document.getElementById("watch-list");
 
 
 // Add JavaScript Below
@@ -27,6 +28,7 @@ var year = ''
 $('#comedySelection').click(function () {
   $('#title').val('');
   $('#year').val('');
+
   randomSelection = comedy[Math.floor(Math.random() * comedy.length)];
   randomMovie = randomSelection;
   document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
@@ -65,6 +67,10 @@ $("#apiSubmit").click(function () {
   title = $("#title").val();
   year = $("#year").val();
 
+  console.log(title);
+
+  
+
   //will clear the movieOutput content so that only one result is shown at a time(DT) 
   movieOutputEl.textContent = "";
 
@@ -74,6 +80,11 @@ $("#apiSubmit").click(function () {
   }else if (title ===! '') {
     console.log(title, year);
   }
+  
+  var titleLi = document.createElement('p');
+  titleLi.textContent= title;
+  console.log(titleLi)
+  watchListEl.append(titleLi);
   
   // Concatenate the variables above into the api url
   var queryString = "https://www.omdbapi.com/?apikey=5c231540&t=" + title + "&y=" + year + "&plot=full&r=json";
@@ -89,12 +100,28 @@ $("#apiSubmit").click(function () {
     } else {
       // Log JSON data into console
       console.log(response);
-    
+
+    console.log(response.Title)
+    var titleUl = document.createElement('ul');
+    titleUl.textContent=response.Title;
+    movieOutputEl.append(titleUl);
+
+    var genreUl = document.createElement('ul');
+    genreUl.textContent=response.Genre;
+    movieOutputEl.append(genreUl);
+
+    var ratedUl = document.createElement('ul');
+    ratedUl.textContent=response.Rated;
+    movieOutputEl.append(ratedUl);
+
+
+
 
       // create an HTML element that will hold all of the elements
       var movieContainer = $('<div class="movie_Container">');
       // Append the movie container to the existing container
       $(".movieOutput").append(movieContainer);
+      
 
       // Go through each property of the object and create/input the data from the object
       for (var prop in response) {
@@ -102,11 +129,14 @@ $("#apiSubmit").click(function () {
         if (prop == "Poster" && response[prop] != "N/A") {
           element = $("<img class='moviePoster'>").attr("src", response[prop]);
         } else {
-          element = $("<h3 class='movieInfo'>").text(prop + ": " + response[prop]);
+          // element = $("<h3 class='movieInfo'>").text(prop + ": " + response[prop]);
         }
 
         movieContainer.append(element);
       }
     }
+    var plotP = document.createElement('p');
+    plotP.textContent=response.Plot;
+    movieOutputEl.append(plotP);
   });
 });
