@@ -72,7 +72,7 @@ $("#apiSubmit").click(function () {
       $("#output").append("No such movie exists");
     } else {
       // Log JSON data into console
-      console.log(response);
+      // console.log(response);
 
       // create an HTML element that will hold all of the elements
       var movieContainer = $('<div class="movie_Container">');
