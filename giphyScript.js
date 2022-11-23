@@ -7,8 +7,19 @@ $('#apiSubmit').click(function () {
 
     giphyContainer = document.getElementById('giphyContainer');
 
-    console.log(giphyString.heaaders);
+    for (var prop in data) {
+        var giphy;
+        if( prop == 'embed_url') {
+            giphy = $("<img class='giphyEmbed'>").attr("src", data[prop])
+        }
+        giphyContainer.append(giphy)
+        console.log(giphy);
+    }
+// data.data[0].url
     
+    // wIcon = data.list[7].weather[0].icon;
+
+
     // var titleUl = document.createElement('ul');
     // titleUl.textContent=giphyString.Title;
     // movieOutputEl.append(titleUl);
