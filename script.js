@@ -7,16 +7,7 @@ var action = ["The Wages of Fear", "Seven Samurai", "Goldfinger", "Shaft", "Ente
 //add a selector for movieOutput(DT)
 var movieOutputEl = document.querySelector('.movieOutput');
 
-watchListEl=document.getElementById("watch-list");
-
-
-// Add JavaScript Below
-
-//  The script below will need to be added to the HTML in order for the function to run
-/* <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
-  crossorigin="anonymous">
-</script> */
+watchListEl = document.getElementById("watch-list");
 
 // Function for selecting a random movie, it is not coded correctly yet
 // movies could be the var that stores the selected array from above
@@ -28,48 +19,49 @@ var year = ''
 $('#comedySelection').click(function () {
   $('#title').val('');
   $('#year').val('');
-
+  movieOutputEl.textContent = "";
   randomSelection = comedy[Math.floor(Math.random() * comedy.length)];
   randomMovie = randomSelection;
-  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the search button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
   console.log(randomMovie);
 });
 
 $('#romcomSelection').click(function () {
   $('#title').val('');
   $('#year').val('');
+  movieOutputEl.textContent = "";
   randomSelection = romcom[Math.floor(Math.random() * romcom.length)];
   randomMovie = randomSelection;
-  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the search button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
   console.log(randomMovie);
 });
 
 $('#horrorSelection').click(function () {
   $('#title').val('');
   $('#year').val('');
+  movieOutputEl.textContent = "";
   randomSelection = horror[Math.floor(Math.random() * horror.length)];
-   randomMovie = randomSelection;
-  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  randomMovie = randomSelection;
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the search button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
   console.log(randomMovie);
 });
 
 $('#actionSelection').click(function () {
   $('#title').val('');
   $('#year').val('');
+  movieOutputEl.textContent = "";
   randomSelection = action[Math.floor(Math.random() * action.length)];
   randomMovie = randomSelection;
-  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the serch button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
+  document.getElementById("randomMovie-Output").innerHTML = randomMovie + '! Press the search button above for some information about the movie for tonight.'; // this adds the selected movie the HTML, may not be needed
   console.log(randomMovie);
 });
+
+
 
 $("#apiSubmit").click(function () {
   //Gather values from the user fields and store them into variables.
   title = $("#title").val();
   year = $("#year").val();
-
-  console.log(title);
-
-  
 
   //will clear the movieOutput content so that only one result is shown at a time(DT) 
   movieOutputEl.textContent = "";
@@ -77,15 +69,15 @@ $("#apiSubmit").click(function () {
   if (title === '') {
     title = randomMovie
     console.log(title, year);
-  }else if (title ===! '') {
+  } else if (title === ! '') {
     console.log(title, year);
   }
-  
+
   var titleLi = document.createElement('p');
-  titleLi.textContent= title;
+  titleLi.textContent = title;
   console.log(titleLi)
   watchListEl.append(titleLi);
-  
+
   // Concatenate the variables above into the api url
   var queryString = "https://www.omdbapi.com/?apikey=5c231540&t=" + title + "&y=" + year + "&plot=full&r=json";
 
@@ -94,34 +86,30 @@ $("#apiSubmit").click(function () {
     url: queryString, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
     method: 'GET'
   }).done(function (response) {
-    if (response.length < 1) {
+    if (response.Response == "False") {
       // Output error message into output container
-      $("#output").append("No such movie exists");
+      $(".movieOutput").append("<b>No such movie exists!<b>");
     } else {
       // Log JSON data into console
+
       console.log(response);
+      console.log(response.Title)
+      var titleUl = document.createElement('ul');
+      titleUl.textContent = response.Title;
+      movieOutputEl.append(titleUl);
 
-    console.log(response.Title)
-    var titleUl = document.createElement('ul');
-    titleUl.textContent=response.Title;
-    movieOutputEl.append(titleUl);
+      var genreUl = document.createElement('ul');
+      genreUl.textContent = response.Genre;
+      movieOutputEl.append(genreUl);
 
-    var genreUl = document.createElement('ul');
-    genreUl.textContent=response.Genre;
-    movieOutputEl.append(genreUl);
-
-    var ratedUl = document.createElement('ul');
-    ratedUl.textContent=response.Rated;
-    movieOutputEl.append(ratedUl);
-
-
-
+      var ratedUl = document.createElement('ul');
+      ratedUl.textContent = response.Rated;
+      movieOutputEl.append(ratedUl);
 
       // create an HTML element that will hold all of the elements
       var movieContainer = $('<div class="movie_Container">');
       // Append the movie container to the existing container
       $(".movieOutput").append(movieContainer);
-      
 
       // Go through each property of the object and create/input the data from the object
       for (var prop in response) {
@@ -136,7 +124,40 @@ $("#apiSubmit").click(function () {
       }
     }
     var plotP = document.createElement('p');
-    plotP.textContent=response.Plot;
+    plotP.textContent = response.Plot;
     movieOutputEl.append(plotP);
+  });
+});
+
+$('#apiSubmit').click(function () {
+  //javascript, jQuery
+  var movie = $('#title').val().toLowerCase();
+
+  if (movie === '') {
+    movie = randomMovie
+    console.log(movie, year);
+  } else if (movie === ! '') {
+    console.log(movie, year);
+  }
+
+  var giphyString = 'https://api.giphy.com/v1/gifs/search?api_key=kESvdoXax2rPgrmMwoGVS1eNRTVE0k60&q=' + movie + '&limit=1&offset=0&rating=pg-13&lang=en';
+
+  $.ajax({
+    url: giphyString,
+    method: 'GET'
+  }).done(function (response) {
+    if (response.length < 1) {
+      $('.giphyOutput').append('No such giphy exists');
+    } else {
+      console.log(response);
+    }
+    console.log(response.data);
+    console.log(response.data[0]);
+    console.log(response.data[0].images.original.url);
+    mGif = response.data[0].images.original.url;
+    console.log(mGif);
+    var imgGif = document.createElement('img')
+    imgGif.setAttribute("src", mGif);
+    movieOutputEl.append(imgGif);
   });
 });
