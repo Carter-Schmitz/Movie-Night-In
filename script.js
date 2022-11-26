@@ -4,8 +4,11 @@ var romcom = ["When Harry Met Sally", "Sleepless in Seattle", "Annie Hall", "Pre
 var horror = ["The Shining", "The Exorcist", "Jaws", "Alien", "The Texas Chainsaw Massacre", "Nosferatu", "Night Of The Living Dead", "Psycho", "The Silence Of The Lambs", "Audition", "The Cabinet Of Dr. Caligari", "Halloween", "The Evil Dead", "Freaks", "The Fly", "Hereditary", "Rosemary’s Baby", "Dawn Of The Dead ", "Dracula", "Evil Dead II", "The Bride Of Frankenstein", "A Nightmare On Elm Street", "Invasion Of The Body Snatchers", "The Blair Witch Project", "Scream", "28 Days Later", "The Thing", "Get Out", "Don’t Look Now", "Creepshow"]
 var action = ["The Wages of Fear", "Seven Samurai", "Goldfinger", "Shaft", "Enter the Dragon", "The Driver", "Raiders of the Lost Ark", "First Blood", "RoboCop", "Die Hard", "Terminator 2: Judgment Day", "Point Break", "The Fugitive", "Léon: The Professional", "Speed ", "Drunken Master II", "The Matrix", "Battle Royale", "Crouching Tiger, Hidden Dragon", "Bad Boys II", "Ong-Bak: The Thai Warrior", "Kill Bill: Vol 1", "The Bourne Ultimatum", "The Raid", "Fast Five", "John Wick", "Mad Max: Fury Road", "The Villainess ", "Mission: Impossible - Fallout"]
 
+var watchListArray = [];
+
 //add a selector for movieOutput(DT)
 var movieOutputEl = document.querySelector('.movieOutput');
+var giphyEl = document.getElementById("giphyContainer");
 
 watchListEl = document.getElementById("watch-list");
 
@@ -73,10 +76,10 @@ $("#apiSubmit").click(function () {
     console.log(title, year);
   }
 
-  var titleLi = document.createElement('p');
-  titleLi.textContent = title;
-  console.log(titleLi)
-  watchListEl.append(titleLi);
+  // var titleLi = document.createElement('p');
+  // titleLi.textContent = title;
+  // console.log(titleLi)
+  // watchListEl.append(titleLi);
 
   // Concatenate the variables above into the api url
   var queryString = "https://www.omdbapi.com/?apikey=5c231540&t=" + title + "&y=" + year + "&plot=full&r=json";
@@ -156,8 +159,71 @@ $('#apiSubmit').click(function () {
     console.log(response.data[0].images.original.url);
     mGif = response.data[0].images.original.url;
     console.log(mGif);
-    var imgGif = document.createElement('img')
+    var imgGif = document.createElement('img');
+    imgGif.setAttribute("class","moviePoster");
     imgGif.setAttribute("src", mGif);
     movieOutputEl.append(imgGif);
   });
+
+  //this will get the movie titles saved in local storage,
+  //and will put them into the watch list array
+  //work when the search button is pushed 
+  //still need to link this to a page refresh 
+
+  var storedMovies = (localStorage.getItem('names'));
+console.log(storedMovies);
+watchListArray = storedMovies.split(",") ;
+console.log(watchListArray);
+
+
 });
+
+watchListEl=document.getElementById("watch-list");
+saveEl = document.getElementById("saveButton");
+saveMovEl = document.querySelector("saveMov");
+
+
+//this is the code that will be used to save the 
+//current movie to the watch-list
+//it does not account for repeated names. 
+
+$("#saveMov").on("click",function(){
+
+ watchListArray.push(title);
+console.log(watchListArray);
+localStorage.setItem("names",watchListArray);
+  var titleLi = document.createElement('p');
+  titleLi.textContent= title;
+  console.log(titleLi)
+  watchListEl.append(titleLi);
+})
+
+//this will keep the save button hidden until the 
+//seach button is hit 
+
+function showDiv(){
+  document.getElementById('saveCont').style.display="block";
+}
+
+$("#apiSubmit").click(showDiv);
+
+//this will append the contet from the movie titles saved 
+//in local storage and append them to the watchlist 
+
+$('#apiSubmit').click(function () {
+
+  watchListEl.textContent = " "
+  var watchListH2 = document.createElement('h2');
+  watchListH2.textContent = "Watch-List:";
+  watchListH2.setAttribute("style","border-bottom:solid;font-weight:bold")
+  watchListEl.append(watchListH2);
+
+  for(var i=0;i<watchListArray.length;i++){
+    var titleLi = document.createElement('p');
+  titleLi.textContent= watchListArray[i];
+  console.log(titleLi)
+  watchListEl.append(titleLi);
+
+  }
+
+})
