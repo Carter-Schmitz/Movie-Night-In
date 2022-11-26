@@ -29,3 +29,23 @@ body{
     align-content: left;
   }
 
+  .saveMov {
+    background-color: rgb(83, 31, 194);
+    color: rgb(13, 12, 12);
+    /* align-content: center; */
+    margin:auto;
+  }
+
+  .saveCont{
+    margin:auto ;
+    text-align: center;
+  }
+  .giphyCont{
+    text-align: center;
+    background-color: rgb(80, 10, 17);
+    color: rgb(22, 20, 20);
+    border-radius: 0;
+    border-bottom: 1px solid black;
+    width: 50%;
+    margin: auto;
+}
