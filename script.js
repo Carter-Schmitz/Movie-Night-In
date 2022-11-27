@@ -13,7 +13,8 @@ var movieOutputEl = document.querySelector('.movieOutput');
 var giphyEl = document.getElementById("giphyContainer");
 
 var watchListEl = document.getElementById("watch-list");
-var saveContEl=document.getElementById('saveCont');
+var saveContEl = document.getElementById('saveCont');
+var clearmovies = document.getElementById('clear-list');
 
 // Function for selecting a random movie, it is not coded correctly yet
 // movies could be the var that stores the selected array from above
@@ -271,3 +272,9 @@ watchListEl.textContent = " "
   }
 }
 setWatchList()
+
+$('#clear-list').click(function() {
+  localStorage.clear();
+  navigator.innerHTML = '';
+  location.reload();
+})
