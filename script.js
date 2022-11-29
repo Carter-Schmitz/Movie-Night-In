@@ -206,8 +206,7 @@ localStorage.setItem("clear",title);
 
 $("#saveMov").on("click",function(){
 
-//this is used to check if the movie you are 
-//trying to save has already been saved(DT)
+
 title = localStorage.getItem('clear')
 
  if (watchListArray.includes(title)){
@@ -227,6 +226,110 @@ title = localStorage.getItem('clear')
     console.log(titleLi)
     watchListEl.append(titleLi);
  }
+
+ $('.reCall').click(function(){
+ 
+
+  var title  = $(this).attr('id');
+
+
+movieOutputEl.textContent = "";
+
+
+
+
+var queryString = "https://www.omdbapi.com/?apikey=5c231540&t=" + title + "&y=" + year + "&plot=full&r=json";
+
+
+$.ajax({
+  url: queryString, 
+  method: 'GET'
+}).done(function (response) {
+  if (response.Response == "False") {
+   
+    $(".movieOutput").append("<b>No such movie exists!<b>");
+  } else {
+  
+
+    
+    var titleUl = document.createElement('ul');
+    titleUl.textContent = response.Title;
+    movieOutputEl.append(titleUl);
+
+    var genreUl = document.createElement('ul');
+    genreUl.textContent = response.Genre;
+    movieOutputEl.append(genreUl);
+
+    var ratedUl = document.createElement('ul');
+    ratedUl.textContent = response.Rated;
+    movieOutputEl.append(ratedUl);
+
+    
+    var movieContainer = $('<div class="movie_Container">');
+  
+    $(".movieOutput").append(movieContainer);
+
+
+    for (var prop in response) {
+      var element;
+      if (prop == "Poster" && response[prop] != "N/A") {
+        element = $("<img class='moviePoster'>").attr("src", response[prop]);
+      } else {
+      
+      }
+
+      movieContainer.append(element);
+    }
+  }
+  var plotP = document.createElement('p');
+  plotP.textContent = response.Plot;
+  movieOutputEl.append(plotP);
+});
+
+
+
+
+
+
+var giphyString = 'https://api.giphy.com/v1/gifs/search?api_key=kESvdoXax2rPgrmMwoGVS1eNRTVE0k60&q=' + title + '&limit=1&offset=0&rating=pg-13&lang=en';
+
+$.ajax({
+  url: giphyString,
+  method: 'GET'
+}).done(function (response) {
+  if (response.length < 1) {
+    $('.giphyOutput').append('No such giphy exists');
+  } else {
+    console.log(response);
+  }
+  console.log(response.data);
+  console.log(response.data[0]);
+  console.log(response.data[0].images.original.url);
+  mGif = response.data[0].images.original.url;
+  console.log(mGif);
+  var imgGif = document.createElement('img');
+  imgGif.setAttribute("class","moviePoster");
+  imgGif.setAttribute("src", mGif);
+  movieOutputEl.append(imgGif);
+});
+
+var storedMovies = (localStorage.getItem('names'));
+console.log(storedMovies);
+
+if(storedMovies){
+watchListArray = storedMovies.split(",") ;
+console.log(watchListArray);
+}
+
+localStorage.setItem("clear",title);
+
+showDiv();
+
+
+})
+
+
+ 
 
 
 
@@ -274,6 +377,8 @@ watchListEl.textContent = " "
   watchListEl.append(titleLi);
 
   }
+
+
 }
 
 setWatchList();
