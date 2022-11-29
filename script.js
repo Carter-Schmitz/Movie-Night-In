@@ -211,22 +211,123 @@ $("#saveMov").on("click",function(){
 title = localStorage.getItem('clear')
 
  if (watchListArray.includes(title)){
-  var movSavedh3= document.createElement('h3');
-  movSavedh3.textContent = "Movie is already saved"
-  movSavedh3.setAttribute("style","font-weight:bold");
-  saveContEl.append(movSavedh3);
   console.log("Movied already Saved");
  }else{
   watchListArray.push(title);
   console.log(watchListArray);
   localStorage.setItem("names",watchListArray);
-    var titleLi = document.createElement('button');
-    titleLi.setAttribute("class","reCall bg-yellow-300 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded");
-    titleLi.setAttribute("id",title);
-    titleLi.textContent= title;
-    console.log(titleLi)
-    watchListEl.append(titleLi);
+   
  }
+
+setWatchList();
+
+$('.reCall').click(function(){
+  console.log("hello137981398173");
+
+  var title  = $(this).attr('id');
+console.log(title);
+
+movieOutputEl.textContent = "";
+
+
+
+
+var queryString = "https://www.omdbapi.com/?apikey=5c231540&t=" + title + "&y=" + year + "&plot=full&r=json";
+
+// Put that query string into the AJAX request
+$.ajax({
+  url: queryString, // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+  method: 'GET'
+}).done(function (response) {
+  if (response.Response == "False") {
+    // Output error message into output container
+    $(".movieOutput").append("<b>No such movie exists!<b>");
+  } else {
+    // Log JSON data into console
+
+    console.log(response);
+    console.log(response.Title)
+    var titleUl = document.createElement('ul');
+    titleUl.textContent = response.Title;
+    movieOutputEl.append(titleUl);
+
+    var genreUl = document.createElement('ul');
+    genreUl.textContent = response.Genre;
+    movieOutputEl.append(genreUl);
+
+    var ratedUl = document.createElement('ul');
+    ratedUl.textContent = response.Rated;
+    movieOutputEl.append(ratedUl);
+
+    // create an HTML element that will hold all of the elements
+    var movieContainer = $('<div class="movie_Container">');
+    // Append the movie container to the existing container
+    $(".movieOutput").append(movieContainer);
+
+    // Go through each property of the object and create/input the data from the object
+    for (var prop in response) {
+      var element;
+      if (prop == "Poster" && response[prop] != "N/A") {
+        element = $("<img class='moviePoster'>").attr("src", response[prop]);
+      } else {
+        // element = $("<h3 class='movieInfo'>").text(prop + ": " + response[prop]);
+      }
+
+      movieContainer.append(element);
+    }
+  }
+  var plotP = document.createElement('p');
+  plotP.textContent = response.Plot;
+  movieOutputEl.append(plotP);
+});
+
+
+
+
+
+
+var giphyString = 'https://api.giphy.com/v1/gifs/search?api_key=kESvdoXax2rPgrmMwoGVS1eNRTVE0k60&q=' + title + '&limit=1&offset=0&rating=pg-13&lang=en';
+
+$.ajax({
+  url: giphyString,
+  method: 'GET'
+}).done(function (response) {
+  if (response.length < 1) {
+    $('.giphyOutput').append('No such giphy exists');
+  } else {
+    console.log(response);
+  }
+  console.log(response.data);
+  console.log(response.data[0]);
+  console.log(response.data[0].images.original.url);
+  mGif = response.data[0].images.original.url;
+  console.log(mGif);
+  var imgGif = document.createElement('img');
+  imgGif.setAttribute("class","moviePoster");
+  imgGif.setAttribute("src", mGif);
+  movieOutputEl.append(imgGif);
+});
+
+//this will get the movie titles saved in local storage,
+//and will put them into the watch list array
+//work when the search button is pushed 
+// (DT)
+
+var storedMovies = (localStorage.getItem('names'));
+console.log(storedMovies);
+
+//this is used to allow the .split function 
+//to work when the local storage is empty(DT)
+if(storedMovies){
+watchListArray = storedMovies.split(",") ;
+console.log(watchListArray);
+}
+
+localStorage.setItem("clear",title);
+
+
+})
+
 
 
 
@@ -259,6 +360,7 @@ function setWatchList(){
   
 
 watchListEl.textContent = " "
+
   var watchListH2 = document.createElement('h2');
   watchListH2.textContent = "Watch-List:";
   watchListH2.setAttribute("style","border-bottom:solid;font-weight:bold")
